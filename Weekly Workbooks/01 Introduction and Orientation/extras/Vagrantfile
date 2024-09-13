@@ -1,0 +1,40 @@
+# In order to use this config file, you will need to have installed both Vagrant and VirtualBox:
+#   https://www.vagrantup.com/downloads
+#   https://www.virtualbox.org/wiki/Downloads
+# Once you have both of these successfully installed...
+# Create a new folder on your computer and place this configuration file inside
+# Make sure that the file is called "Vagrantfile" (without any file extensions)
+# Open a terminal/shell window and CD into the folder
+# Run: vagrant up
+# Wait for everything to be downloaded and installed (this will take a while !)
+# DON'T try to login to the virtual machine via the terminal/text mode command prompt...
+# Be patient and wait for the graphical login to appear
+# Then select the "vagrant" user and login with password: vagrant
+# Basic editors are pre-installed (nano and gedit) - install an IDE if you like !
+# To transfer documents into the box, drop them into the folder that contains this config file
+# Anything in that folder will appear in the /vagrant folder on the root of the linux box
+# To shut down the vagrant box use: vagrant halt
+# To start the box again later use: vagrant up
+# This will start the existing box (without having to download and install everything again)
+
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "bento/centos-7"
+  config.ssh.forward_agent = true
+  config.ssh.forward_x11 = true
+  config.vm.provider "virtualbox" do |vb|
+    vb.memory = 2048
+    vb.cpus = 2
+    vb.gui = true
+    vb.customize ["modifyvm", :id, "--vram", "8"]
+  end
+  config.vm.provision "shell", inline: <<-SHELL
+    sudo yum -y install git clang cmake install gcc-c++ xauth xorg-x11-xauth epel-release
+    sudo yum -y groupinstall "Server with GUI"
+    sudo yum -y install SDL2-devel
+    sudo yum remove -y initial-setup initial-setup-gui
+    sudo systemctl isolate graphical.target
+    sudo systemctl set-default graphical.target
+    service gdm restart
+  SHELL
+end

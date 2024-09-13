@@ -1,0 +1,24 @@
+The implementation language for this unit will be C++. Although everybody may have their own preferred language for writing code, C++ is still very much a standard for low-level graphics rendering applications. The aim of this unit is to develop a fundamental understanding of graphics rendering and as such, we will NOT be making use of any existing rendering frameworks (such as OpenGL or DirectX). Instead, we will building our own rending engines ! That said, the practical exercises will make use of the following two external libraries:
+- <a href="https://github.com/g-truc/glm" target="_blank">GLM</a> for general purpose mathematical operations (mostly for manipulating vectors and matrices)
+- <a href="https://www.libsdl.org" target="_blank">SDL2</a> for drawing to the screen (mostly setting the colour of individual pixels !)
+
+Remember: The aim of this unit is to learn to build things from the ground-up, so don't use anything other than SDL2 and GLM when implementing the practical exercises (and in the coursework itself).
+
+In order to make things a little tidier, we have provided a "wrapper" object that encapsulates the SDL2 library which we have called `DrawingWindow`. This wrapper initialises SDL, opens up a window for drawing to the screen and provides various methods for drawing and interacting with the user. The `DrawingWindow` object has the following methods:  
+
+- `DrawingWindow` constructor for the drawing window class that takes 3 parameters:
+    - Horizontal resolution for the window (integer width)
+    - Vertical resolution for the window (integer height)
+    - Whether or not to scale the window into full-screen mode (boolean)
+- `setPixelColour` sets an individual pixel (indicated by [x,y] coordinates) to a specified ARGB colour
+- `getPixelColour` returns the colour of the pixel indicated by [x,y] coordinates
+- `renderFrame` draws all pixels to the screen (until you call this, all pixel changes are just in a memory buffer)
+- `savePPM` saves the currently rendered content of the window to a .ppm image file
+- `saveBMP` saves the currently rendered content of the window to a .bmp image file
+- `clearPixels` clears all pixel colours (from the whole window)
+- `pollForInputEvents` checks to see if there are any events waiting to be processed (returns true if there are !)
+
+Examples of how to call the methods of the `DrawingWindow` class are included in the 
+<a href="extras/RedNoise/src/RedNoise.cpp" target="_blank">template project</a>. 
+
+

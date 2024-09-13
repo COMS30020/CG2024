@@ -1,0 +1,3 @@
+On some platforms you may need to #include `<cstring>` in the `DrawingWindow` class (if the compiler complains that it can't find `memset`).
+
+On some platforms you might also need to alter the #include statement in the `DrawingWindow.h` file from `"SDL.h"` to `"SDL2/SDL.h"` to allow the compiler to find the SDL library.

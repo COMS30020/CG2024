@@ -1,0 +1,17 @@
+We have tried to use a programming language and set of libraries that are agnostic to the underlying architecture and operating system. As a result, it should be _fairly_ straight-forward to get things running on most machines. Note however that we will test and mark the coursework assignment on the lab machines, so you should avoid using any platform-specific features that aren't available on the lab machines.
+
+The template project we have provided assumes that you have the `clang` complier installed (which many of you may already have !). If you do not currently have `clang`, you can either install it now or alternatively (if you have a different compiler already installed) update the `COMPILER` variable in the project Makefile to reflect the compiler that you do have installed (so that it uses `g++` or `cl` for example).
+
+You can use an IDE for development if you wish (CLion, Visual Studio, Eclipse, XCode etc). We have provided a CMake file inside the project root folder to help you configure and build your project. CLion works well as an IDE and is able to open the `CMakeLists.txt` file as a project. If you prefer to use VSCode instead then you will need to install some extensions - see <a href="https://code.visualstudio.com/docs/cpp/cmake-linux" target="_blank">this tutorial</a> for a step-by-step guide. If you do use an IDE then please make sure that your project can still be compiled outside of the IDE (i.e. by providing a Makefile that works on the lab machines).
+
+Installation of SDL2 can sometimes be non-trivial (due to the fact that it must link with native graphics libraries). For this reason, the recommended way to install it is using a package manager (e.g. apt, rpm, yum, brew, ports, pacman etc). The name of the required SDL2 package will vary depending on your platform. Here are some likely candidates for a range of different package managers:
+```
+apt install libsdl2-dev
+rpm -i SDL2-devel
+yum install SDL2-devel
+brew install sdl2
+port install libsdl2
+pacman -S sdl2
+```
+
+If you can't get your package manager to install SDL2 (or if you don't have a package manager at all !) then you will have to install it manually. Various useful resources are available online for achieving this, but you might like to start by taking a look at <a href="https://lazyfoo.net/tutorials/SDL/01_hello_SDL/" target="_blank">this tutorial</a>. If you are really struggling to install SDL on your existing operating system, then the following sections provide some alternatives you might like to consider.

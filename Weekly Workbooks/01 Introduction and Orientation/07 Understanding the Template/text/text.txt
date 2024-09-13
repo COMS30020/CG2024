@@ -1,0 +1,11 @@
+It is useful to spend a little time getting to know the structure of the <a href="extras/RedNoise/src/RedNoise.cpp" target="_blank">main class</a> in the template project. We are going to be using it a lot over the next few weeks, so it is going to be important. The main function in the template contains a "forever" loop which:
+
+1. Polls the event queue for incoming mouse and keyboard events
+2. Draws the scene to the screen memory buffer
+3. Renders the memory buffer onto the SDL window
+
+Drawing the scene onto the screen buffer basically involves looping through a pixel at a time, deciding what colour it should be, packing that colour into an integer and setting the relevant pixel to that colour. The `RedNoise` example just creates a random pattern of red pixels of varying brightness. This may seem a bit pointless, but it does allow us to make sure that the code in actually running. In later weeks we are going to do more sophisticated (and more useful) things with the pixels !
+
+You will note from the `handleEvent` method that it is possible to respond to both mouse and keyboard events. In the `RedNoise` example, key presses simply print out messages to the terminal (by directing strings to the `cout` object). In later weeks we are going to use these event handlers to allow the user to navigate around a scene and switch between different rendering modes. For the time being however, just printing out messages is fine.
+
+Clicking the mouse inside the SDL window will cause a screenshot of the current content of the window to be saved to the filesystem. You will notice that both PPM and BMP files are generated. The reason for this is that some platforms and some image viewers can be fussy about the format of image files. Pick whichever file format works best on your platform and work with that.

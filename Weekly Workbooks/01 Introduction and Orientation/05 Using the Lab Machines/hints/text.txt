@@ -1,0 +1,5 @@
+For help resolving problems with remote access to the lab machines, check out the
+<a href="https://uob.sharepoint.com/sites/itservices/SitePages/contacts.aspx" target="_blank">IT services help page</a>
+in particular the rapid response teaching support helpline !
+
+If you get a warning that `GLX is not supported` when remote logging in to the lab machines using X2Go then you will need to disable hardware acceleration in the template project. Open the `libs/sdw/DrawingWindow.cpp` file and change the value of the `flags` variable from `SDL_WINDOW_OPENGL` so that it now reads `SDL_WINDOW_FOREIGN`. This will disable hardware acceleration and _should_ solve the problem - it may run more slowly, but at least it will run !

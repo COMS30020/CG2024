@@ -1,0 +1,13 @@
+In order to help get you started, we have provided a template project called <a href="extras/RedNoise" target="_blank">RedNoise</a>. This project provides the structure that you will need for the weekly workbooks, as well as illustrating the use of the `DrawingWindow` methods. 
+
+In order to help you compile, link and run the <a href="extras/RedNoise" target="_blank">RedNoise</a> project, a Makefile has been provided for you inside the project root folder. This makefile contains multiple rules to build code for different purposes:
+
+- `debug` a development build rule that will compile and link your project for use with a debugger (gdb)
+- `diagnostic` a development build rule that includes extra memory checking and diagnosis flags.  
+Note: this rule requires <a href="https://clang.llvm.org/docs/AddressSanitizer.html" target="_blank">Address Sanitizer</a> to be installed (comes built-in with some C++ compilers)
+- `speedy` a rule that builds an optimised "high performance" executable (making interaction testing quicker)
+- `production` a build rule to make an executable without debug hooks (for release or distribution)
+
+Just typing `make` on its own will build the project using the _debug_ rule and run the resultant executable.
+
+When you have successfully built and run the `RedNoise` project you should see a window that looks like the below animation. Remember that the cleanest way to quit an SDL application is by pressing the `ESC` key ! If you have a window that you can't close (which does happen from time to time), you may need to kill off the process manually using Task Manager, Activity Monitor or the kill/killall command (depending on your platform).
