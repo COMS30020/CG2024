@@ -1,12 +1,12 @@
 ## Introduction and Orientation
-### <a href="https://www.ole.bris.ac.uk/webapps/blackboard/content/launchLink.jsp?course_id=_260093_1&tool_id=_5824_1&tool_type=TOOL&mode=cpview&mode=reset" target="_blank"> Weekly Briefing ![](../../resources/icons/briefing.png) </a>
+### <a href="https://uob-my.sharepoint.com/:v:/g/personal/sl17668_bristol_ac_uk/ESPPmcjadHdCsudCstkqOiEBGshJlC8IK3N1qtK6Z1FOYQ?e=Zjv5rk&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D" target="_blank"> Weekly Briefing ![](../../resources/icons/briefing.png) </a>
 ### Task 1: Introduction
 
 
 The aim of this introductory workbook is to ease you gently into the first week of term. The main objective is to make sure you are able to build and run the code template project. This is of crucial importance because this template is the starting point for **ALL** of the work you will undertake on this unit. Getting the template project working _might_ take some time and perseverance (depending on the operating system you intend to use for this unit). It is **ESSENTIAL** that you achieve everything in this workbook during the first week of term. If you are unable to build and run applications, you will quickly find yourself falling behind on this unit.  
 
 
-# 
+#
 ### Task 2: Language and Libraries
 
 
@@ -30,14 +30,14 @@ In order to make things a little tidier, we have provided a "wrapper" object tha
 - `clearPixels` clears all pixel colours (from the whole window)
 - `pollForInputEvents` checks to see if there are any events waiting to be processed (returns true if there are !)
 
-Examples of how to call the methods of the `DrawingWindow` class are included in the 
-<a href="extras/RedNoise/src/RedNoise.cpp" target="_blank">template project</a>. 
+Examples of how to call the methods of the `DrawingWindow` class are included in the
+<a href="extras/RedNoise/src/RedNoise.cpp" target="_blank">template project</a>.
 
 
-  
 
 
-# 
+
+#
 ### Task 3: Using Your Own Computer (Native OS)
 
 
@@ -62,10 +62,10 @@ If you can't get your package manager to install SDL2 (or if you don't have a pa
 
 **Hints & Tips:**  
 The code template (that we will introduce later in this workbook) comes bundled with the GLM library built-in, so there is no need for you to install this yourselves !
-  
 
 
-# 
+
+#
 ### Task 4: Using Your Own Computer (Resident OS)
 
 
@@ -80,14 +80,14 @@ It is possible to build and compile the template project using Windows Subsystem
 If using a virtual machine, you should avoid using display scaling (i.e. use VirtualBox in 100% "Unscaled Output" mode) otherwise you may experience a reduction in window manager performance.  
 
 
-# 
+#
 ### Task 5: Using the Lab Machines
 
 
 As an alternative to getting SDL2 installed on your own computer, you might choose to compile and run your code on the lab machines in MVB (which have all of the required software installed). The lab machines can either be used physically (whilst you are actually in the lab) or remotely (via remote desktop services). In order to gain remote access you will need to use the _X2Go_ client. Full instructions for installing and running the _X2Go_ client can be found in <a href="https://uob.sharepoint.com/sites/itservices/SitePages/fits-engineering-linux-x2go.aspx" target="_blank">this how-to guide</a>. It is worth noting however that the quality of your experience using this approach will vary depending on the quality of your internet connection.
 
 
-   
+
 
 
 **Hints & Tips:**  
@@ -98,11 +98,11 @@ in particular the rapid response teaching support helpline !
 If you get a warning that `GLX is not supported` when remote logging in to the lab machines using X2Go then you will need to disable hardware acceleration in the template project. Open the `libs/sdw/DrawingWindow.cpp` file and change the value of the `flags` variable from `SDL_WINDOW_OPENGL` so that it now reads `SDL_WINDOW_FOREIGN`. This will disable hardware acceleration and _should_ solve the problem - it may run more slowly, but at least it will run !  
 
 
-# 
+#
 ### Task 6: The Template Project
 
 
-In order to help get you started, we have provided a template project called <a href="extras/RedNoise" target="_blank">RedNoise</a>. This project provides the structure that you will need for the weekly workbooks, as well as illustrating the use of the `DrawingWindow` methods. 
+In order to help get you started, we have provided a template project called <a href="extras/RedNoise" target="_blank">RedNoise</a>. This project provides the structure that you will need for the weekly workbooks, as well as illustrating the use of the `DrawingWindow` methods.
 
 In order to help you compile, link and run the <a href="extras/RedNoise" target="_blank">RedNoise</a> project, a Makefile has been provided for you inside the project root folder. This makefile contains multiple rules to build code for different purposes:
 
@@ -125,7 +125,7 @@ On some platforms you may need to #include `<cstring>` in the `DrawingWindow` cl
 On some platforms you might also need to alter the #include statement in the `DrawingWindow.h` file from `"SDL.h"` to `"SDL2/SDL.h"` to allow the compiler to find the SDL library.  
 
 
-# 
+#
 ### Task 7: Understanding the Template
 
 
@@ -142,5 +142,5 @@ You will note from the `handleEvent` method that it is possible to respond to bo
 Clicking the mouse inside the SDL window will cause a screenshot of the current content of the window to be saved to the filesystem. You will notice that both PPM and BMP files are generated. The reason for this is that some platforms and some image viewers can be fussy about the format of image files. Pick whichever file format works best on your platform and work with that.  
 
 
-# 
+#
 ### End of workbook
