@@ -1,0 +1,13 @@
+A good way to tackle this problem is to start by creating variables for the four corners of the window and initialising them with the following primary colours:
+
+``` cpp
+glm::vec3 topLeft(255, 0, 0);        // red 
+glm::vec3 topRight(0, 0, 255);       // blue 
+glm::vec3 bottomRight(0, 255, 0);    // green 
+glm::vec3 bottomLeft(255, 255, 0);   // yellow
+```
+
+Then, using your previously written `vec3` interpolation function to help:
+1. Calculate the colour of all the pixels in the first (left-most) column of the window
+2. Calculate the colour of all the pixels in the last (right-most) column of the window
+3. For each row, calculate the colour of each pixel in that row by interpolating between the first and last pixels

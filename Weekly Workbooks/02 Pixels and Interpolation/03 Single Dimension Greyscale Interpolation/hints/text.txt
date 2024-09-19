@@ -1,0 +1,1 @@
+You might have to think a bit to figure out how to adapt the pixel looping code inside the `draw` function of `RedNoise` in order to achieve the above gradient. Don't worry about the transparency/alpha channel of the pixels - just set it to 255 (fully opaque) as we did in the original `RedNoise` template.

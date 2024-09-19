@@ -1,0 +1,5 @@
+Before commencing with this week's workbook, make sure you have first watched the "Weekly Briefing" linked to above to gain an overview of the practical tasks involved. Note that you will will need to be <a href="https://www.ole.bris.ac.uk/auth-saml/saml/login?apId=_183_1&amp;redirectUrl=https%3A%2F%2Fwww.ole.bris.ac.uk" target="_blank">logged into Blackboard</a> already in order for the link to the weekly briefing video to work (because, you know - Blackboard).
+
+This week we will take a look at the fundamentals of computer graphics: basic drawing and pixel manipulation. Everything that we cover this week will be in 2 dimensions. In future weeks we will move on to begin working in 3D, it is however important that we walk before we try to run !
+
+You will hopefully find this workbook fairly straight-forward and should be able to complete it relatively quickly. This is intended to be a gentle week in order to provide some flexibility in the workload - in case you are still having difficulties installing SDL2, compiling and running your code. Next week the workbooks start to get more challenging !

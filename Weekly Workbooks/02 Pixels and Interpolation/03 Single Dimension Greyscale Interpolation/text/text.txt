@@ -1,0 +1,3 @@
+Interpolating numbers is fine, but this unit is supposed to be about graphics - so let's draw something ! Using the floating point interpolation function that you wrote in the previous task, draw a greyscale gradient across the `DrawingWindow`, from left to right (as shown in the image below). 
+
+For each pixel in the window, you will need to create a suitable colour by packing RGB channel data into a `uint32_t` (32 bit integer) variable. To find out more about about pixels and pixel colour packing, take a look at the slides and audio narration for this section (the blue buttons above).

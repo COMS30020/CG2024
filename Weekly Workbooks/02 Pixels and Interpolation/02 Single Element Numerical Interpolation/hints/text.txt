@@ -1,0 +1,2 @@
+You might like to take a look at 
+<a href="https://www.tutorialspoint.com/cpp_standard_library/cpp_vector_push_back.htm" target="_blank">this documentation</a> on C++ vectors in order to get you started.

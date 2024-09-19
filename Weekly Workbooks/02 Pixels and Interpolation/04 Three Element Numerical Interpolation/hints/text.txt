@@ -1,0 +1,7 @@
+In this task we encounter a slightly annoying and potentially confusing naming problem - two different types of vector. It is important to distinguish between the following:
+- `vector` (from the `std` library) which we use as a dynamic list structure
+- `vec3` (from the `glm` library) which we use to store 3 element entities
+
+In order to use the `vec3` class, you will need to import the GLM header file with `#include <glm/glm.hpp>`. Note that you don't need to install the GLM library - this is already embedded within the `RedNoise` template (it's in the `libs` folder, if you are interested).
+
+It is wise to explicitly reference the package when using classes and methods (e.g. `glm::vec3`). You might see examples of C++ code that import entire namespaces with `using namespace` (so that you don't keep having to specify the `glm::` bit). In this unit, it is wise to avoid importing entire namespaces - there are some duplicate method names in some of the packages we use later on, which can lead to confusion and ambiguity.

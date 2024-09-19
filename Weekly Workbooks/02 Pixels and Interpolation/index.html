@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>02 Pixels and Interpolation</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">02 Pixels and Interpolation</h1>
+</header>
+<h2 id="pixels-and-interpolation">Pixels and Interpolation</h2>
+<h3
+id="weekly-briefing"><a href="https://www.ole.bris.ac.uk/webapps/blackboard/content/launchLink.jsp?course_id=_260093_1&tool_id=_5824_1&tool_type=TOOL&mode=cpview&mode=reset" target="_blank">
+Weekly Briefing <img src="../../resources/icons/briefing.png" />
+</a></h3>
+<h3 id="task-1-introduction">Task 1: Introduction</h3>
+<p>Before commencing with this week’s workbook, make sure you have first
+watched the “Weekly Briefing” linked to above to gain an overview of the
+practical tasks involved. Note that you will will need to be
+<a href="https://www.ole.bris.ac.uk/auth-saml/saml/login?apId=_183_1&amp;redirectUrl=https%3A%2F%2Fwww.ole.bris.ac.uk" target="_blank">logged
+into Blackboard</a> already in order for the link to the weekly briefing
+video to work (because, you know - Blackboard).</p>
+<p>This week we will take a look at the fundamentals of computer
+graphics: basic drawing and pixel manipulation. Everything that we cover
+this week will be in 2 dimensions. In future weeks we will move on to
+begin working in 3D, it is however important that we walk before we try
+to run !</p>
+<p>You will hopefully find this workbook fairly straight-forward and
+should be able to complete it relatively quickly. This is intended to be
+a gentle week in order to provide some flexibility in the workload - in
+case you are still having difficulties installing SDL2, compiling and
+running your code. Next week the workbooks start to get more challenging
+!</p>
+<h1 id="section"></h1>
+<h3 id="task-2-single-element-numerical-interpolation">Task 2: Single
+Element Numerical Interpolation</h3>
+<p>Interpolation (informally: “filling in the gaps between known
+values”) is an essential operation in Computer Graphics. We will use
+this operation numerous times throughout this unit (for various
+different purposes). It is essential that we become familiar with the
+basic principles - we are going to need to interpolate some pretty
+complex constructs later on !</p>
+<p>In your <code>RedNoise</code> project, add a new function called
+<code>interpolateSingleFloats</code> that takes 3 parameters: -
+<code>from</code> - a floating point number to start from -
+<code>to</code> - a floating point number to go up to -
+<code>numberOfValues</code> - the number of steps required from the
+start to the end</p>
+<p>This function should return an <strong>evenly spaced</strong> list of
+size <code>numberOfValues</code> that contains floating point numbers
+between <code>from</code> and <code>to</code>. In order to store this
+list we will make use the <code>vector</code> dynamical data structure
+from the <code>std</code> library. By way of example, if we call our new
+function like so: <code>interpolateSingleFloats(2.2, 8.5, 7)</code> it
+should return a vector containing the following values:
+<code>2.2, 3.25, 4.3, 5.35, 6.4, 7.45, 8.5</code>.</p>
+<p>Once written, test out your function to make sure it correctly
+returns the values from the above example. You can do this by adding the
+following code to your project’s main function:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">float</span><span class="op">&gt;</span> result<span class="op">;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> interpolateSingleFloats<span class="op">(</span><span class="fl">2.2</span><span class="op">,</span> <span class="fl">8.5</span><span class="op">,</span> <span class="dv">7</span><span class="op">);</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span><span class="op">(</span><span class="dt">size_t</span> i<span class="op">=</span><span class="dv">0</span><span class="op">;</span> i<span class="op">&lt;</span>result<span class="op">.</span>size<span class="op">();</span> i<span class="op">++)</span> <span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> result<span class="op">[</span>i<span class="op">]</span> <span class="op">&lt;&lt;</span> <span class="st">&quot; &quot;</span><span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>cout <span class="op">&lt;&lt;</span> <span class="bu">std::</span>endl<span class="op">;</span></span></code></pre></div>
+<p>Note that <code>std::cout</code> refers to the character output
+object of the standard library and that <code>std::endl</code> is a
+flushed newline. It is also worth highlighting that <code>size_t</code>
+is an unsigned integer type provided by C++ that is useful for
+representing the size of things (such as vectors).</p>
+<p><strong>Hints &amp; Tips:</strong><br />
+You might like to take a look at
+<a href="https://www.tutorialspoint.com/cpp_standard_library/cpp_vector_push_back.htm" target="_blank">this
+documentation</a> on C++ vectors in order to get you started.</p>
+<h1 id="section-1"></h1>
+<h3 id="task-3-single-dimension-greyscale-interpolation">Task 3: Single
+Dimension Greyscale Interpolation</h3>
+<p><a href='03%20Single%20Dimension%20Greyscale%20Interpolation/slides/segment-1.pdf' target='_blank'>
+<img src="../../resources/icons/slides.png" /> </a>
+<a href='03%20Single%20Dimension%20Greyscale%20Interpolation/audio/segment-1.mp4' target='_blank'>
+<img src="../../resources/icons/audio.png" /> </a></p>
+<p>Interpolating numbers is fine, but this unit is supposed to be about
+graphics - so let’s draw something ! Using the floating point
+interpolation function that you wrote in the previous task, draw a
+greyscale gradient across the <code>DrawingWindow</code>, from left to
+right (as shown in the image below).</p>
+<p>For each pixel in the window, you will need to create a suitable
+colour by packing RGB channel data into a <code>uint32_t</code> (32 bit
+integer) variable. To find out more about about pixels and pixel colour
+packing, take a look at the slides and audio narration for this section
+(the blue buttons above).</p>
+<p><img
+src="03%20Single%20Dimension%20Greyscale%20Interpolation/images/grey-scale.jpg" /></p>
+<p><strong>Hints &amp; Tips:</strong><br />
+You might have to think a bit to figure out how to adapt the pixel
+looping code inside the <code>draw</code> function of
+<code>RedNoise</code> in order to achieve the above gradient. Don’t
+worry about the transparency/alpha channel of the pixels - just set it
+to 255 (fully opaque) as we did in the original <code>RedNoise</code>
+template.</p>
+<h1 id="section-2"></h1>
+<h3 id="task-4-three-element-numerical-interpolation">Task 4: Three
+Element Numerical Interpolation</h3>
+<p>The previous task was relatively straight-forward - now let’s try
+something a little more complex. Write a new function called
+<code>interpolateThreeElementValues</code> that calculates a vector of
+interpolated values. This time however, rather than just single floating
+point values, this new function should operate on three-element compound
+data types (specifically, instances of the
+<a href="https://en.wikibooks.org/wiki/GLSL_Programming/Vector_and_Matrix_Operations" target="_blank">vec3</a>
+class provided by GLM). If we have a function that can interpolate these
+types, then we can deal with a wide range of entities including colours,
+3D coordinates, directions (in fact anything with 3 numerical elements
+!)</p>
+<p>By way of example, if we have the following two <code>vec3</code>
+variables:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>glm<span class="op">::</span>vec3 from<span class="op">(</span><span class="fl">1.0</span><span class="op">,</span> <span class="fl">4.0</span><span class="op">,</span> <span class="fl">9.2</span><span class="op">);</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>glm<span class="op">::</span>vec3 to<span class="op">(</span><span class="fl">4.0</span><span class="op">,</span> <span class="fl">1.0</span><span class="op">,</span> <span class="fl">9.8</span><span class="op">);</span></span></code></pre></div>
+<p>And pass them into our new interpolation function (along with a
+<code>numberOfValues</code> of 4), then we should get the following
+results back:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="op">(</span><span class="fl">1.0</span><span class="op">,</span> <span class="fl">4.0</span><span class="op">,</span> <span class="fl">9.2</span><span class="op">)</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="op">(</span><span class="fl">2.0</span><span class="op">,</span> <span class="fl">3.0</span><span class="op">,</span> <span class="fl">9.4</span><span class="op">)</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="op">(</span><span class="fl">3.0</span><span class="op">,</span> <span class="fl">2.0</span><span class="op">,</span> <span class="fl">9.6</span><span class="op">)</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="op">(</span><span class="fl">4.0</span><span class="op">,</span> <span class="fl">1.0</span><span class="op">,</span> <span class="fl">9.8</span><span class="op">)</span></span></code></pre></div>
+<p>Write your function and then test it with the above values in order
+to check that it operates as intended.</p>
+<p><strong>Hints &amp; Tips:</strong><br />
+In this task we encounter a slightly annoying and potentially confusing
+naming problem - two different types of vector. It is important to
+distinguish between the following: - <code>vector</code> (from the
+<code>std</code> library) which we use as a dynamic list structure -
+<code>vec3</code> (from the <code>glm</code> library) which we use to
+store 3 element entities</p>
+<p>In order to use the <code>vec3</code> class, you will need to import
+the GLM header file with <code>#include &lt;glm/glm.hpp&gt;</code>. Note
+that you don’t need to install the GLM library - this is already
+embedded within the <code>RedNoise</code> template (it’s in the
+<code>libs</code> folder, if you are interested).</p>
+<p>It is wise to explicitly reference the package when using classes and
+methods (e.g. <code>glm::vec3</code>). You might see examples of C++
+code that import entire namespaces with <code>using namespace</code> (so
+that you don’t keep having to specify the <code>glm::</code> bit). In
+this unit, it is wise to avoid importing entire namespaces - there are
+some duplicate method names in some of the packages we use later on,
+which can lead to confusion and ambiguity.</p>
+<h1 id="section-3"></h1>
+<h3 id="task-5-two-dimensional-colour-interpolation">Task 5: Two
+Dimensional Colour Interpolation</h3>
+<p><a href='05%20Two%20Dimensional%20Colour%20Interpolation/animation/segment-1.mp4' target='_blank'>
+<img src="../../resources/icons/animation.png" /> </a></p>
+<p>In the earlier grayscale interpolation task, we interpolated a single
+floating point value in just one dimension (the x axis). In this next
+task we will interpolate three-element float values (RGB colours) in
+<em>two</em> dimensions (x <em>and</em> y). Click on the blue button
+above to view an animation (and audio narration) that provides more
+details about interpolating RGB colour values. Once you are confident
+with the concepts covered, implement 2D RGB interpolation in order to
+produce the effect shown in the image below.</p>
+<p>To help you in this task, you can use the
+<code>interpolateThreeElementValues</code> function that you wrote in
+the previous task. It might seem a bit strange to use a vector
+(<code>vec3</code>) to store and manipulate a colour (rather than using
+a specifically designed <code>Colour</code> class). However, since you
+have already implemented a <code>vec3</code> interpolation function, we
+might as well make use of that. Don’t worry though - we will introduce a
+more appropriate <code>Colour</code> class later on in this unit.</p>
+<p><img
+src="05%20Two%20Dimensional%20Colour%20Interpolation/images/colour-spectrum.jpg" /></p>
+<p><strong>Hints &amp; Tips:</strong><br />
+A good way to tackle this problem is to start by creating variables for
+the four corners of the window and initialising them with the following
+primary colours:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>glm<span class="op">::</span>vec3 topLeft<span class="op">(</span><span class="dv">255</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">);</span>        <span class="co">// red </span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>glm<span class="op">::</span>vec3 topRight<span class="op">(</span><span class="dv">0</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">255</span><span class="op">);</span>       <span class="co">// blue </span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>glm<span class="op">::</span>vec3 bottomRight<span class="op">(</span><span class="dv">0</span><span class="op">,</span> <span class="dv">255</span><span class="op">,</span> <span class="dv">0</span><span class="op">);</span>    <span class="co">// green </span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>glm<span class="op">::</span>vec3 bottomLeft<span class="op">(</span><span class="dv">255</span><span class="op">,</span> <span class="dv">255</span><span class="op">,</span> <span class="dv">0</span><span class="op">);</span>   <span class="co">// yellow</span></span></code></pre></div>
+<p>Then, using your previously written <code>vec3</code> interpolation
+function to help: 1. Calculate the colour of all the pixels in the first
+(left-most) column of the window 2. Calculate the colour of all the
+pixels in the last (right-most) column of the window 3. For each row,
+calculate the colour of each pixel in that row by interpolating between
+the first and last pixels</p>
+<h1 id="section-4"></h1>
+<h3 id="end-of-workbook">End of workbook</h3>
+</body>
+</html>

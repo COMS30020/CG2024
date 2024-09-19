@@ -1,0 +1,18 @@
+The previous task was relatively straight-forward - now let's try something a little more complex.
+Write a new function called `interpolateThreeElementValues` that calculates a vector of interpolated values. This time however, rather than just single floating point values, this new function should operate on three-element compound data types (specifically, instances of the <a href="https://en.wikibooks.org/wiki/GLSL_Programming/Vector_and_Matrix_Operations" target="_blank">vec3</a> class provided by GLM). If we have a function that can interpolate these types, then we can deal with a wide range of entities including colours, 3D coordinates, directions (in fact anything with 3 numerical elements !)
+
+By way of example, if we have the following two `vec3` variables:
+``` cpp
+glm::vec3 from(1.0, 4.0, 9.2);
+glm::vec3 to(4.0, 1.0, 9.8);
+```
+And pass them into our new interpolation function (along with a `numberOfValues` of 4), then we should get the following results back:
+
+``` cpp
+(1.0, 4.0, 9.2)
+(2.0, 3.0, 9.4)
+(3.0, 2.0, 9.6)
+(4.0, 1.0, 9.8)
+```
+
+Write your function and then test it with the above values in order to check that it operates as intended.
