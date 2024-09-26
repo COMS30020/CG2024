@@ -1,0 +1,5 @@
+Drawing filled triangles is more difficult than you might think ! Take a look at the media linked to by the buttons above (you will notice that there are a number of them - reflecting the complexity of this task). Note that you do NOT need to implement the interactive features demonstrated in the above animations - these are just for illustration purposes. You should however write a new function that takes a `CanvasTriangle` and a `Colour` as parameters and draws a suitable _filled_ triangle. 
+
+As well as drawing a _filled_ triangle of the specified colour, your function should also draw a **white** _stroked_ triangle over the top of it (this is to make sure that your "rasterising" is correct - both filled and stroked triangles should line up !)  
+
+Make your application interactive, so that pressing the `f` key will cause a randomly coloured filled triangle to be drawn at a random position on the screen. You should end up with a screen that looks something like the one below.

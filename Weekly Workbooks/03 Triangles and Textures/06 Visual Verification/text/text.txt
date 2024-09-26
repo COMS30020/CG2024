@@ -1,0 +1,17 @@
+The final part of this week's workbook is to verify that your texture mapping function is working correctly. In order to test out your code, you should attempt to texture a triangle that consists of the following three vertices:
+
+| Canvas Point |
+|:------------:|
+|  (160, 10)   |
+|  (300, 230)  |
+|  (10, 150)   |
+
+You should fill this triangle with pixels from the example texture map, mapping canvas points to texture map points as follows:
+
+| Canvas Point |   | Texture Point |
+|:------------:|---|:-------------:|
+|  (160, 10)   | → |   (195, 5)    |
+|  (300, 230)  | → |   (395, 380)  |
+|  (10, 150)   | → |   (65, 330)   |
+
+If all goes to plan, you should end up with a textured triangle that looks like the one illustrated in the screenshot below. Note that along the lower edge of the triangle, 7 separate stones can be seen. If your render doesn't show all 7, then it is not correct !

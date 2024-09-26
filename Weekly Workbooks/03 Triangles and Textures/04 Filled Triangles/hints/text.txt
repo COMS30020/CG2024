@@ -1,0 +1,5 @@
+When testing your filled triangle drawing code, watch out for "skipped" lines (as illustrated in the orange triangle below). These skipped lines are due to floating point values being truncated ("chopped off") when they are converted into integer pixel row numbers. When converting from floats to ints you should be sure apply a suitable rounding function. Note that you may have to use different rounding strategies, depending on what _kind_ of integer position you are calculating (e.g. row number, x start position, x end position etc). The best advice we can give here is to _try_ something and see if it _looks_ OK (if it doesn't, then try an alternative !). The ethos of this unit is very much about learning through "experimentation and exploration" !
+
+![](skipped-line.jpg)
+
+Just in case you need it: you might like to use the standard C <a href="http://www.cplusplus.com/reference/utility/swap/" target="_blank">std::swap</a> function if you need to do any sorting ;o)

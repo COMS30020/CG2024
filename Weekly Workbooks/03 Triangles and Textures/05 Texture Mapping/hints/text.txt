@@ -1,0 +1,5 @@
+Any new canvas points you create (e.g. when splitting triangles) must also be linked to a texture point (calculated by interpolating a suitable position within the texture image).
+
+Remember: although canvas triangles will be flat topped/bottomed, their equivalent texture triangles will NOT be.  
+
+Be careful when calculating the texture map pixel index values. Some of your calculations are likely to involve floating point values - if you don't convert these to integer index values in the right way there is the danger that you will get a "skewed" texture !

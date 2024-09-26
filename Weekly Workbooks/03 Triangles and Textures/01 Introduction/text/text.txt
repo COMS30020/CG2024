@@ -1,0 +1,5 @@
+As usual, make sure you have seen the weekly briefing above before attempting to complete this week's workbook tasks. Note that you will will need to be <a href="https://www.ole.bris.ac.uk/auth-saml/saml/login?apId=_183_1&amp;redirectUrl=https%3A%2F%2Fwww.ole.bris.ac.uk" target="_blank">logged into Blackboard</a> already in order for the link to the weekly briefing video to work (because, you know - Blackboard).
+
+Although we are still working primarily in 2 dimensions, the aim of this week's workbook is to build up a collection of useful drawing functions that can be used later on in the unit. Much of the later work in future workbooks will be in 3D. However, as we shall soon see, we will still need to do a lot of 2D drawing (strange but true). After all, screens/displays are by their very nature two dimensional !
+
+**Important:** Make sure you read the "Hints and Tips" at the end of each section before attempting that task. This might save you a lot of time and anguish !

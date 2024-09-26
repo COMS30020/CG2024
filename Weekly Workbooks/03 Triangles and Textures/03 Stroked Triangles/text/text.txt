@@ -1,0 +1,10 @@
+Now let's make our drawing functions a bit more sophisticated by drawing a more complex shape - a triangle ! Triangles are going to form the basic building block for the rest of this unit - they are incredibly powerful and we can achieve much using them.
+
+Add a new function to your code that draws "stroked" (unfilled) triangles. This function should draw the three outer edge lines of a triangle that is passed in as parameters. A `CanvasTriangle` class has been provided in the `libs/sdw` folder to help you. This class represents a 2D triangle for drawing onto the screen/canvas. This class contains an array of three `CanvasPoints` that are used to store the vertices of the triangle. Add `#include <CanvasTriangle.h>` to your code in order to import this class.
+
+In order to make your code more versatile, add an additional parameter to your triangle drawing function that allows a colour to be passed in (so that triangles of different colours can be drawn). You should use the same `Colour` class that was introduced in the previous task to represent the colour of the triangle.
+
+In order to make your application interactive, add to the event handling function of your main class so that when the `u` key is pressed, your triangle drawing function is called. The parameters passed to your function should be a `CanvasTriangle` of 3 randomly generated vertices and a randomly generated colour.
+
+Test out your code by pressing the `u` key (lots of times !!!).  
+You should end up with a screen that looks something like the one below.

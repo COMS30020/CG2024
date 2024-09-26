@@ -1,0 +1,3 @@
+Use the knowledge of interpolation you gained from last week's workbook (and the functions you wrote) to help you construct your line drawing function.
+
+Note that the `CanvasPoint` and `Colour` classes both override the `<<` operator, so you can direct them straight to `cout` for debugging purposes !

@@ -1,0 +1,5 @@
+A sensible way to approach the challenge of drawing a triangle is to make use of your previously implemented line drawing function (to draw the three sides of the triangle).
+
+In completing this task, you might like to use the standard C <a href="http://www.cplusplus.com/reference/cstdlib/rand/" target="_blank">rand</a> function to help. This function returns a random integer between 0 and 32767 (depending on platform !). In order to bring this integer into a desired range, we can use the modulus operator `%`. For example `rand()%256` will give us a random number in the range 0-255.
+
+Note that the `CanvasTriangle` class overrides the `<<` operator so that you can direct instances of this class straight to `cout` for debugging purposes.

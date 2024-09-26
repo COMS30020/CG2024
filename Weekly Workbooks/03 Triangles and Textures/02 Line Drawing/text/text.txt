@@ -1,0 +1,11 @@
+We start this week by writing one of the core building blocks of any graphics framework - a function to draw straight lines. Although this might seem simple and almost trivial, there are some technical implementation issues that prove an interesting challenge !
+
+View the slides and audio narration linked to above and then, using the knowledge you have gained, add a function to your code to draw a simple line in the SDL window. Your function should accept as parameters a `from` point and a `to` point. A `CanvasPoint` class has been provided in the `libs/sdw` folder to help you. Add `#include <CanvasPoint.h>` to the "includes" section of your code in order to import this class. The class is used to represent a particular point on the drawing window (what is often called the drawing "canvas"). If you open the `CanvasPoint` class you will see that it contains the x and y coordinates of the point, as well as a number of other attributes. You can just ignore these additional attributes for the time being - we will use them in subsequent workbooks.
+
+You should also allow a colour to be passed into your function so that a line of a particular colour can be drawn. A `Colour` class has also been provided for you in the `libs/sdw` folder - this class contains values for red, green and blue channels as well as an optional name for the colour (don't worry about naming your colours for this workbook - we will use colour names in a later exercise). Add `#include <Colour.h>` to your code in order to import this class.
+
+Test your code by drawing some lines to and from some easily verifiable positions (i.e. lines we can easily see have been drawn correctly). For example, you might like to try the following:
+- A line from the top-left corner of the window to the centre of the window
+- A line from the top-right corner of the window to the centre of the window
+- A vertical line all the way down the middle of the screen
+- A horizontal line a third the width of the screen, centred both horizontally and vertically
