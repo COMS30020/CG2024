@@ -1,0 +1,5 @@
+Clearly positional information is important, but how do we know what the model surfaces should actually _look_ like ? When working with OBJ files, this kind of aesthetic information is stored in a separate "materials" file. Your next job is therefore to write a function to read in
+<a href="models/cornell-box.mtl" target="_blank">this sample OBJ material file</a>
+and populate a "palette" of colours. You can use the previously encountered `Colour` class for this purpose (this is where the `name` attribute now becomes useful).
+
+Once you have successfully loaded in the materials file, add some additional code to your geometry parsing function (from the previous task) so that it accesses your colour palette when it encounters a reference to a material (lines that begin with `usemtl` in the OBJ geometry file). It makes sense to read in the materials file _before_ you read in the geometry file - this is so you already have the colours stored in a data structure when you encounter references to them in the geometry file. Note that `ModelTriangle` objects have a `colour` attribute that can be used to store a reference to the colour of triangles.

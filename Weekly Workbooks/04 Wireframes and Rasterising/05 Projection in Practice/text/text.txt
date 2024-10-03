@@ -1,0 +1,8 @@
+In the previous task, we considered projection onto the image plane abstractly and in theory. In this task we explore how this projection is actually achieved and then go on to implement it in code. You should start by adding a new function to your project called `projectVertexOntoCanvasPoint` which takes in the following three parameters:
+
+- `cameraPosition`: the location of the camera in 3 dimensional space (passed in as a `vec3`)
+- `focalLength`: the distance from camera to the image plane/canvas
+- `vertexPosition`: the 3 dimensional position of a single vertex (passed in as a `vec3`)
+
+Add code to this new method to calculate and return the 2D `CanvasPoint` position at which the model vertex should be projected onto the image plane. For a particular vertex, that has a position in 3D space of _(x, y, z)_ we can calculate its position on the image plane _(u, v)_ using the two formulae provided below (where _f_ is focal length, _W_ and _H_ are the width and height of the image plane). For reference, the `W/2` and `H/2` elements are the shift in origin used to align the centre of the room with the centre of the image plane (as shown in the diagram from the previous task).
+

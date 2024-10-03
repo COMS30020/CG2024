@@ -1,0 +1,1 @@
+You could just use a vector to store the palette of colours or, if you want something a bit fancier, use a hashmap or hashtable for more efficient colour lookup (using the name of the colour as a key).

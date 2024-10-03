@@ -1,0 +1,7 @@
+Note that the `CanvasPoint` class has a `depth` attribute that you might like to use to help you keep track of the inverse z depth of each vertex of a `CanvasTriangle`.
+
+When you create the depth buffer array you should first initialise every element to zero. This signifies that at the start (before rendering the scene takes place) that there is no model element represented in any pixel position. Another way to think of this is that this value represents `1/Z` where Z is infinity, so that any model element that is subsequently encountered is sure to be closer.
+
+Because we are using the inverse of the z depth, we must remember that the colour a particular pixel should be drawn must be the model element with the _largest_ `1/Z`. Consider the diagram below for example - the pixel on the image plane through which the dotted line passes should clearly be drawn red (since the red triangle is the closest to the camera/eye). However `1/Z` for the red triangle (0.5) is _greater_ than that of the blue triangle (0.25). The _largest_ `1/Z` always wins !
+
+![](z-depth.png)

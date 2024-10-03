@@ -1,0 +1,9 @@
+Note that these formulae assume the model vertices are in the _camera coordinate system_ (i.e. the camera is the origin and x, y and z are distances relative to the camera position). The vertices in the OBJ model are however all in the _model coordinate system_ (i.e. relative to the centre of the room). As a result of this, you will need to do a transposition in order to convert positions from one coordinate system to the other. You will need to get used to such transpositions in this unit, there are numerous origins we have to cope with !
+
+In the interests of consistency, you should adopt the convention that positive z is "out of the screen" (towards you) and negative z is "into the screen" (away from you). Things can get really tricky if different students use different z directions !
+
+A question that is often asked is "where should I position my camera ?". A good starting point is to place your camera centred in the x and y dimensions, but "stepped back" a bit in the z (by 4.0). Your initial camera position should therefore be `(0.0, 0.0, 4.0)` - you should store this position in a `vec3` variable (since this will make calculations a lot easier later on).
+
+As for the focal length, a good distance to use is `2.0`. Assuming that you followed the above advice about camera position, this value will position the image plane halfway between the camera and the centre of the model. Strange things will happen if you position the image plane behind the model, or even behind the camera !
+
+It is important to note that focal length is a "pure" distance (i.e. it does not have a direction). You can think of the image plane as being "attached" to the camera. No matter where the camera is or what direction it is pointing, the image plane will remain centred in the camera field of view, always at the same distance from it (the focal length).
