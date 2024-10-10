@@ -1,0 +1,4 @@
+When altering the camera orientation, we again need to create a 3x3 rotation matrix (just as we did for manipulating the camera position). Similarly, we can make use of the `*` operator to multiply together the rotation matrix and the camera orientation matrix to calculate the new camera orientation.
+
+Note that the multiplication operation used to apply the camera orientation to the camera-to-vertex vector, is NOT commutative (i.e. the order of the operands WILL affect the outcome of the calculation). When using the camera orientation in your code, you should therefore ensure you use the ordering as shown in the lecture slides, namely: `adjustedVector = cameraToVertex * cameraOrientation`. Switching the order of these operands can result in strange and unexpected results !
+

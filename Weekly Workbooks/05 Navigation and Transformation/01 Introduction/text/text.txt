@@ -1,0 +1,1 @@
+This workbook continues from where we left off last week - implementing additional features for the rasterising renderer. Note that if you didn't complete all of the tasks from last week, you should finish these first before starting on this week's workbook.
