@@ -1,0 +1,3 @@
+If you need to compare two triangles for equality, make sure you use their **index** values as the basis for comparison (i.e. their positions in the triangle vector/array). If you try to compare two instances of the `ModelTriangle` class using the `==` operator, you may inadvertently be testing the memory address of those variables (rather than checking to see if those two variables actually hold the same triangle !)
+
+The `RayTriangleIntersection` class that was provided for you has an attribute called `triangleIndex` that can be used to store the index number of a triangle being intersected. Note that you'll have to fill this attribute yourself with a suitable value when your `getClosestValidIntersection` function identifies a valid intersection. 

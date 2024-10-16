@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>06 Raytracing and Shadows</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">06 Raytracing and Shadows</h1>
+</header>
+<h2 id="raytracing-and-shadows">Raytracing and Shadows</h2>
+<h3
+id="weekly-briefing"><a href="https://www.ole.bris.ac.uk/webapps/blackboard/content/launchLink.jsp?course_id=_260093_1&tool_id=_5824_1&tool_type=TOOL&mode=cpview&mode=reset" target="_blank">
+Weekly Briefing <img src="../../resources/icons/briefing.png" />
+</a></h3>
+<h3 id="task-1-introduction">Task 1: Introduction</h3>
+<p><a href='01%20Introduction/slides/segment-1.pdf' target='_blank'>
+<img src="../../resources/icons/slides.png" /> </a>
+<a href='01%20Introduction/audio/segment-1.mp4' target='_blank'> <img
+src="../../resources/icons/audio.png" /> </a>
+<a href='01%20Introduction/animation/segment-1.mp4' target='_blank'>
+<img src="../../resources/icons/animation.png" /> </a></p>
+<p>As we have seen previously, rasterising is a fast and efficient
+approach to rendering a 3 dimensional scene. However it has limitations
+- there are a number of phenomenon that are difficult (or even
+impossible) to achieve using this approach. In particular, rendering
+“light” and “shadow” is not well suited to rasterisation. For this
+reason, we now turn our attention to an alternative form of rendering:
+<em>ray tracing</em>. Take a look at the slides, audio narration and
+animation linked to above in order to gain a high-level understanding of
+the operation of <em>ray tracing</em>. Once you have grasped the basic
+principles, move on to the practical tasks in the rest of this
+workbook.</p>
+<p>It is advisable to continue working with your current project and
+augment it with additional ray tracing functions. This will not only
+allow you to switch between different rendering modes (wireframe,
+rasterised, ray-traced) but will also permit “hybrid” rendering - where
+different elements of a scene are rendered using different rendering
+approaches.</p>
+<p><strong>Hints &amp; Tips:</strong><br />
+The code that you will write for this workbook will be VERY resource
+intensive. If you find that your renderer is running too slowly to allow
+you to navigate the camera around the scene effectively, then you might
+like to try using the optimised <code>make speedy</code> build rule.
+Note however that this build rule uses “unsafe” mathematic optimisations
+- although fast, the resultant code can behave in unusual and
+predictable ways. If you encounter any unexpected behaviour, test your
+code using one of the <em>other</em> build rules - the problem might not
+be your code, but the optimisations in the <code>speedy</code> build
+rule.</p>
+<p>Ray tracing is a challenging activity that will exercise all your
+abilities as a programmer. Due to the nature of many of the tasks in
+this workbook, traditional approaches to debugging will typically prove
+ineffective. To aid you in your work, we have provided a
+<a href="../../Debugging" target="_blank">debugging guide</a> - the
+techniques outlined in this document will allow you to more effectively
+detect and isolate errors in your code.</p>
+<h1 id="section"></h1>
+<h3 id="task-2-closest-intersection">Task 2: Closest Intersection</h3>
+<p><a href='02%20Closest%20Intersection/slides/segment-1.pdf' target='_blank'>
+<img src="../../resources/icons/slides.png" /> </a>
+<a href='02%20Closest%20Intersection/audio/segment-1.mp4' target='_blank'>
+<img src="../../resources/icons/audio.png" /> </a>
+<a href='02%20Closest%20Intersection/audio/segment-2.mp4' target='_blank'>
+<img src="../../resources/icons/audio.png" /> </a>
+<a href='02%20Closest%20Intersection/animation/segment-1.mp4' target='_blank'>
+<img src="../../resources/icons/animation.png" /> </a>
+<a href='02%20Closest%20Intersection/animation/segment-2.mp4' target='_blank'>
+<img src="../../resources/icons/animation.png" /> </a></p>
+<p>The first objective we need to achieve when attempting to perform ray
+tracing is to be able to detect <em>if</em> (and more importantly
+<em>where</em>) a projected ray intersects with a model triangle. Watch
+the narrated slides and animations above to gain a theoretical
+understanding of how to perform this operation.</p>
+<p>With the knowledge gained, write a function called
+<code>getClosestIntersection</code> that given: - the <em>position</em>
+of the camera in 3 dimensional space (represented as a
+<code>vec3</code>) - the <em>direction</em> of a ray being cast from the
+camera into the scene (also as a <code>vec3</code>)</p>
+<p>will search through the all of the triangles in the current scene and
+return details of the <em><strong>closest</strong></em> intersected
+triangle (if indeed there is an intersection !).</p>
+<p>We appreciate that this is a complex task, so to help you achieve
+this, the code below is the C++ equivalent of the ray/triangle
+intersection equation that was shown in the slides above:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>glm<span class="op">::</span>vec3 e0 <span class="op">=</span> triangle<span class="op">.</span>vertices<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">-</span> triangle<span class="op">.</span>vertices<span class="op">[</span><span class="dv">0</span><span class="op">];</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>glm<span class="op">::</span>vec3 e1 <span class="op">=</span> triangle<span class="op">.</span>vertices<span class="op">[</span><span class="dv">2</span><span class="op">]</span> <span class="op">-</span> triangle<span class="op">.</span>vertices<span class="op">[</span><span class="dv">0</span><span class="op">];</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>glm<span class="op">::</span>vec3 SPVector <span class="op">=</span> cameraPosition <span class="op">-</span> triangle<span class="op">.</span>vertices<span class="op">[</span><span class="dv">0</span><span class="op">];</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>glm<span class="op">::</span>mat3 DEMatrix<span class="op">(-</span>rayDirection<span class="op">,</span> e0<span class="op">,</span> e1<span class="op">);</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>glm<span class="op">::</span>vec3 possibleSolution <span class="op">=</span> glm<span class="op">::</span>inverse<span class="op">(</span>DEMatrix<span class="op">)</span> <span class="op">*</span> SPVector<span class="op">;</span></span></code></pre></div>
+<p>It is important to recognise that the <code>possibleSolution</code>
+calculated by the above code is NOT the <code>(x,y,z)</code> coordinates
+of a point in 3 dimensional space, but rather a three-element data
+structure that consists of:</p>
+<ul>
+<li><code>t</code> the <em>absolute</em> distance along the ray from the
+camera to the intersection point</li>
+<li><code>u</code> the <em>proportional</em> distance along the
+triangle’s first edge that the intersection point occurs</li>
+<li><code>v</code> the <em>proportional</em> distance along the
+triangle’s second edge that the intersection point occurs</li>
+</ul>
+<p>Calculating the actual position of the intersection point in 3
+dimensional space can be done in two different ways. Both approaches
+(described below) <em>should</em> give the same location (once you
+transpose them into the same coordinate system !) In fact it might be a
+useful double-check to see if they agree on the same intersection point.
+These two approaches are:</p>
+<ul>
+<li>use the direction of the projected ray and distance <code>t</code>
+to find the intersection point relative to the camera <em>or</em></li>
+<li>insert <code>u</code> and <code>v</code> into the formula below, to
+find the intersection point relative to the world origin</li>
+</ul>
+<p><img src="02%20Closest%20Intersection/images/formula.jpg" /></p>
+<p><strong>Hints &amp; Tips:</strong><br />
+Your function is going to need to return various details about the
+intersection point found. To help you deal with this, we have provided a
+class in the <code>libs/sdw</code> folder called
+<code>RayTriangleIntersection</code> that you might like to use to store
+and return all of the intersection details.</p>
+<p>You should bear in mind that a single ray fired into a scene may well
+intersect with multiple different triangles (the front of the blue box,
+the back of the blue box, the back wall of the room etc). Remember that
+we are interested in the intersection that is
+<em><strong>closest</strong></em> to the camera (i.e. has the smallest
+<code>t</code>).</p>
+<h1 id="section-1"></h1>
+<h3 id="task-3-validating-intersections">Task 3: Validating
+Intersections</h3>
+<p><a href='03%20Validating%20Intersections/animation/segment-1.mp4' target='_blank'>
+<img src="../../resources/icons/animation.png" /> </a></p>
+<p>We need to be a little bit careful when searching for ray/triangle
+intersections since the <code>getClosestIntersection</code> function can
+often return false-positive results ! The reason for this is that the
+formulae provided previously allow us to calculate the intersection
+between a line and a <em>plane</em>. We must however remember that a
+triangle is a discrete bounded segment of a plane. The code that you
+wrote in the previous task may well find solutions that are <em>on the
+same plane</em> as the triangle, but not actually <em>within the
+bounds</em> of the triangle itself (as illustrated by the X in the
+diagram below).</p>
+<p>In order to solve this problem, we must validate the coordinates of
+any <em>potential</em> intersection <em>before</em> we can accept it as
+a solution. Watch the video linked to at the top of this task for an
+explanation of how this is achieved. Once you have grasped the basic
+principles, implement a validation check in your
+<code>getClosestIntersection</code> function so that it checks a
+<strong>possible</strong> solution to make sure it is valid
+<em>before</em> returning it as an <strong>actual</strong> solution. If
+the <em>closest</em> intersection is NOT valid, your function should
+then check the <em>next closest</em> intersection to see if that is
+valid (and so on until it finds a valid intersection). You might like to
+rename your function to <code>getClosestValidIntersection</code> in
+order to provide a clearer indication of the operation of the code.</p>
+<p>To help you in this task, integrate the following three tests into
+your code:</p>
+<pre><code>(u &gt;= 0.0) &amp;&amp; (u &lt;= 1.0)
+(v &gt;= 0.0) &amp;&amp; (v &lt;= 1.0)
+(u + v) &lt;= 1.0</code></pre>
+<p>You should also check that the distance <code>t</code> from the
+camera to the intersection is positive - otherwise you may end up
+rendering triangles that are actually <em>behind</em> the camera !</p>
+<p><img
+src="03%20Validating%20Intersections/images/outside-bounds.jpg" /></p>
+<p><strong>Hints &amp; Tips:</strong><br />
+Test your function by passing in some ray direction vectors with a
+<em>known</em> intersection points (e.g. the ray that is fired through
+the dead centre of the image plane <em>should</em> intersect with the
+front of the blue box in the test model). If you print out the colour of
+the closest valid intersected triangle, this should give you a rough
+idea of whether or not your function is working.</p>
+<p>Think carefully about what your function should do if there is NO
+valid intersection to be found. It would be useful to return some kind
+of recognisable “no intersection found” value (so that the code calling
+your function can take appropriate action).</p>
+<h1 id="section-2"></h1>
+<h3 id="task-4-ray-tracing-the-scene">Task 4: Ray Tracing the Scene</h3>
+<p><a href='04%20Ray%20Tracing%20the%20Scene/slides/segment-1.pdf' target='_blank'>
+<img src="../../resources/icons/slides.png" /> </a>
+<a href='04%20Ray%20Tracing%20the%20Scene/audio/segment-1.mp4' target='_blank'>
+<img src="../../resources/icons/audio.png" /> </a></p>
+<p>Now that you have a function that can identify the closest valid
+intersection of a single ray, we can use this to render an entire scene
+! Write a new <code>draw</code> function that renders the Cornell Box
+model using Ray Tracing. Don’t throw away your old “rasterising”
+<code>draw</code> function - you are going to need this later. Instead
+you should rename it to something appropriate (such as
+<code>drawRasterisedScene</code>).</p>
+<p>In your new <code>draw</code> function, loop through each pixel on
+the image plane (top-to-bottom, left-to-right), casting a ray from the
+camera, <em>through</em> the current pixel and into the scene
+(remembering to normalise any direction vectors to avoid scaling
+effects). Using your previously written
+<code>getClosestValidIntersection</code> function, determine if the ray
+intersects with a triangle in the model. When a valid intersection has
+been identified, paint the image plane pixel with the colour of the
+closest intersected triangle.</p>
+<p>Remember that in this task, you are converting <em><em>from</em></em>
+a 2D canvas pixel position <em><em>into</em></em> a direction vector to
+fire into three dimensional space. In many ways this is the opposite of
+your previously written <code>getCanvasIntersectionPoint</code>
+function, where you converted <em><em>from</em></em> a 3D vertex
+position <em><em>into</em></em> a 2D canvas position.</p>
+<p>When everything is working correctly, you should end up with a render
+that looks similar to the one shown in the diagram below.</p>
+<p><img
+src="04%20Ray%20Tracing%20the%20Scene/images/basic-ray-tracing.jpg" /></p>
+<p><strong>Hints &amp; Tips:</strong><br />
+Your code needs to be careful and considerate when calling the
+<code>getClosestValidIntersection</code> function. Weird things can
+happen if the code calling this function assumes that a valid
+intersection is <em>always</em> returned. Check to make sure it isn’t
+returning a “no intersection found” value before attempting to colour a
+pixel.</p>
+<h1 id="section-3"></h1>
+<h3 id="task-5-casting-shadows">Task 5: Casting Shadows</h3>
+<p><a href='05%20Casting%20Shadows/slides/segment-1.pdf' target='_blank'>
+<img src="../../resources/icons/slides.png" /> </a>
+<a href='05%20Casting%20Shadows/audio/segment-1.mp4' target='_blank'>
+<img src="../../resources/icons/audio.png" /> </a></p>
+<p>At this stage, it probably doesn’t seem like you have made any
+progress - if anything, this is a <em>slower</em> way of achieving the
+same results as with the rasteriser. In this next task (and in the tasks
+tackled next week as well), we will be doing things that are either
+<em>hard</em> or <em>impossible</em> to do with a rasteriser - so stick
+with it, it will all to be worth it in the end !</p>
+<p>Shadows are a key element of 3D rendering that we have until this
+point not addressed. We see shadows all the time in the real world (just
+take a look around you now !). If we want our renders to look realistic,
+we are going to need to simulate them somehow. For this task, you are
+going to need a new <code>vec3</code> variable to hold the position of a
+single-point light source. A location in the middle of the room, above
+the origin, somewhere near the ceiling (but still inside the room) would
+seem a sensible place for it.</p>
+<p>Determining whether or not a particular point on a surface should be
+drawn in shadow is conceptually relatively straight-forward. All we have
+to do is to ask ourselves the question: can a particular point “see” the
+light ? However, there are some additional complexities that we have to
+deal with when implementing a consistent shadow effect. Review the
+slides and audio narration above and then implement the concepts
+discussed in your Ray Tracer.</p>
+<p>It is worth noting that your already-implemented
+<code>getClosestValidIntersection</code> function does a lot of the work
+required in order to check for the visibility of the light from a point
+on a surface. You may however need to invest a bit of time refactoring
+it to make it versatile enough to be used for this purpose.</p>
+<p>Once you have implemented a shadow feature, your render of the
+Cornell Box should look something a little bit like the image below
+(depending on where you position your light source !). Note that your
+shadow may well appear a little bit “speckly” and you might have shadow
+pixels appearing where you wouldn’t expect to see them. Don’t worry,
+this is not unusual and is a common occurrence when first attempting to
+render shadows. In the following task we explore this phenomenon in more
+depth and introduce a technique to (hopefully) fix it.</p>
+<p><img src="05%20Casting%20Shadows/images/without-ambient.jpg" /></p>
+<h1 id="section-4"></h1>
+<h3 id="task-6-shadow-acne">Task 6: Shadow Acne</h3>
+<p><a href='06%20Shadow%20Acne/slides/segment-1.pdf' target='_blank'>
+<img src="../../resources/icons/slides.png" /> </a>
+<a href='06%20Shadow%20Acne/audio/segment-1.mp4' target='_blank'> <img
+src="../../resources/icons/audio.png" /> </a>
+<a href='06%20Shadow%20Acne/audio/segment-2.mp4' target='_blank'> <img
+src="../../resources/icons/audio.png" /> </a></p>
+<p>When implementing your shadow you may notice that is has a “speckled”
+appearance and/or spills out of the area where the shadow should appear
+(as illustrated in the image below). This effect is known as “shadow
+acne” and it is a commonly encountered phenomenon in Ray Traced shadows.
+View the slides and audio narration linked to above for a discussion of
+the causes of this effect and an explanation of one possible solution to
+this problem. Once you have gained this understanding, add some
+additional code to your project to remove this phenomenon from your
+render.</p>
+<p><img src="06%20Shadow%20Acne/images/center.jpg" /></p>
+<p><strong>Hints &amp; Tips:</strong><br />
+If you need to compare two triangles for equality, make sure you use
+their <strong>index</strong> values as the basis for comparison
+(i.e. their positions in the triangle vector/array). If you try to
+compare two instances of the <code>ModelTriangle</code> class using the
+<code>==</code> operator, you may inadvertently be testing the memory
+address of those variables (rather than checking to see if those two
+variables actually hold the same triangle !)</p>
+<p>The <code>RayTriangleIntersection</code> class that was provided for
+you has an attribute called <code>triangleIndex</code> that can be used
+to store the index number of a triangle being intersected. Note that
+you’ll have to fill this attribute yourself with a suitable value when
+your <code>getClosestValidIntersection</code> function identifies a
+valid intersection.</p>
+<h1 id="section-5"></h1>
+<h3 id="task-7-interactive-renderer-switching">Task 7: Interactive
+Renderer Switching</h3>
+<p>As a final task in this workbook, add some additional key event
+handlers to your program that allows the user to interactively switch
+between the three main modes of rendering:</p>
+<ul>
+<li>Wireframe: Scene drawn using simple stroked/outline triangles</li>
+<li>Rasterised: Scene drawn using filled rasterised triangles</li>
+<li>Ray Traced: Scene drawn using filled ray traced triangles</li>
+</ul>
+<p>Being able to switch between these different modes will prove very
+useful later on in the unit when attempting manual interactive testing:
+it will allow you to navigate the camera around the scene using the FAST
+wireframe or rasterised renderers. Then, once the camera is in the
+desired position, you can switch to the (much slower) Ray Traced
+renderer to view the fully lit scene from the current camera
+position.</p>
+<h1 id="section-6"></h1>
+<h3 id="end-of-workbook">End of workbook</h3>
+</body>
+</html>

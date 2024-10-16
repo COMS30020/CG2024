@@ -1,0 +1,7 @@
+Now that you have a function that can identify the closest valid intersection of a single ray, we can use this to render an entire scene ! Write a new `draw` function that renders the Cornell Box model using Ray Tracing. Don't throw away your old "rasterising" `draw` function - you are going to need this later. Instead you should rename it to something appropriate (such as `drawRasterisedScene`).
+
+In your new `draw` function, loop through each pixel on the image plane (top-to-bottom, left-to-right), casting a ray from the camera, _through_ the current pixel and into the scene (remembering to normalise any direction vectors to avoid scaling effects). Using your previously written `getClosestValidIntersection` function, determine if the ray intersects with a triangle in the model. When a valid intersection has been identified, paint the image plane pixel with the colour of the closest intersected triangle. 
+
+Remember that in this task, you are converting _*from*_ a 2D canvas pixel position _*into*_ a direction vector to fire into three dimensional space. In many ways this is the opposite of your previously written `getCanvasIntersectionPoint` function, where you converted _*from*_ a 3D vertex position _*into*_ a 2D canvas position.
+
+When everything is working correctly, you should end up with a render that looks similar to the one shown in the diagram below.

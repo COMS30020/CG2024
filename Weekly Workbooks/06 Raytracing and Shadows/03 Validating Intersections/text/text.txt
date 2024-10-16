@@ -1,0 +1,13 @@
+We need to be a little bit careful when searching for ray/triangle intersections since the `getClosestIntersection` function can often return false-positive results ! The reason for this is that the formulae provided previously allow us to calculate the intersection between a line and a _plane_. We must however remember that a triangle is a discrete bounded segment of a plane. The code that you wrote in the previous task may well find solutions that are _on the same plane_ as the triangle, but not actually _within the bounds_ of the triangle itself (as illustrated by the X in the diagram below).
+
+In order to solve this problem, we must validate the coordinates of any _potential_ intersection _before_ we can accept it as a solution. Watch the video linked to at the top of this task for an explanation of how this is achieved. Once you have grasped the basic principles, implement a validation check in your `getClosestIntersection` function so that it checks a **possible** solution to make sure it is valid _before_ returning it as an **actual** solution. If the _closest_ intersection is NOT valid, your function should then check the _next closest_ intersection to see if that is valid (and so on until it finds a valid intersection). You might like to rename your function to `getClosestValidIntersection` in order to provide a clearer indication of the operation of the code.
+
+To help you in this task, integrate the following three tests into your code:
+
+```
+(u >= 0.0) && (u <= 1.0)
+(v >= 0.0) && (v <= 1.0)
+(u + v) <= 1.0
+```
+
+You should also check that the distance `t` from the camera to the intersection is positive - otherwise you may end up rendering triangles that are actually _behind_ the camera !

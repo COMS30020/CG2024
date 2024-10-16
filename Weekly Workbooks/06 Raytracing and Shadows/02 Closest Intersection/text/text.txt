@@ -1,0 +1,30 @@
+The first objective we need to achieve when attempting to perform ray tracing is to be able to detect _if_ (and more importantly _where_) a projected ray intersects with a model triangle. Watch the narrated slides and animations above to gain a theoretical understanding of how to perform this operation.
+
+With the knowledge gained, write a function called `getClosestIntersection` that given:
+- the _position_ of the camera in 3 dimensional space (represented as a `vec3`)
+- the _direction_ of a ray being cast from the camera into the scene (also as a `vec3`)
+
+will search through the all of the triangles in the current scene and return details of the _**closest**_ intersected triangle (if indeed there is an intersection !).
+
+We appreciate that this is a complex task, so to help you achieve this, the code below is the C++ equivalent of the ray/triangle intersection equation that was shown in the slides above:  
+
+``` cpp
+glm::vec3 e0 = triangle.vertices[1] - triangle.vertices[0];
+glm::vec3 e1 = triangle.vertices[2] - triangle.vertices[0];
+glm::vec3 SPVector = cameraPosition - triangle.vertices[0];
+glm::mat3 DEMatrix(-rayDirection, e0, e1);
+glm::vec3 possibleSolution = glm::inverse(DEMatrix) * SPVector;
+```
+
+It is important to recognise that the `possibleSolution` calculated by the above code is NOT the `(x,y,z)` coordinates of a point in 3 dimensional space, but rather a three-element data structure that consists of:
+
+- `t` the _absolute_ distance along the ray from the camera to the intersection point
+- `u` the _proportional_ distance along the triangle's first edge that the intersection point occurs
+- `v` the _proportional_ distance along the triangle's second edge that the intersection point occurs
+
+Calculating the actual position of the intersection point in 3 dimensional space can be done in two different ways. Both approaches (described below) _should_ give the same location (once you transpose them into the same coordinate system !) In fact it might be a useful double-check to see if they agree on the same intersection point. These two approaches are:
+
+- use the direction of the projected ray and distance `t` to find the intersection point relative to the camera _or_
+- insert `u` and `v` into the formula below, to find the intersection point relative to the world origin
+
+

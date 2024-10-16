@@ -1,0 +1,3 @@
+Test your function by passing in some ray direction vectors with a _known_ intersection points (e.g. the ray that is fired through the dead centre of the image plane _should_ intersect with the front of the blue box in the test model). If you print out the colour of the closest valid intersected triangle, this should give you a rough idea of whether or not your function is working.
+
+Think carefully about what your function should do if there is NO valid intersection to be found. It would be useful to return some kind of recognisable "no intersection found" value (so that the code calling your function can take appropriate action).
