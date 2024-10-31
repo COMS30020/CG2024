@@ -1,0 +1,5 @@
+In order to store the position of your light, you should add a new `vec3` variable to your code to keep track of the coordinates of the light in 3 dimensional space.
+
+To find the distance between the light and a point on a triangle, you might like to make use of the `length` function from the GLM library - this will give you the magnitude of a `vec3` variable. Make sure you don't normalise your `vec3` in this task - otherwise you'll always get a length of 1 (remember that in this situation, we _need_ the distance !).
+
+To help you test this form of lighting and debug your code, you may wish to add some additional key event handlers that allow you to interactively shift the position of your light source around the model. Due to the fact that Ray Tracing is a computationally intensive activity, you will probably find that moving the light is a slow and laborious process - this is where the ability to switch between the different types of rendering becomes really useful !

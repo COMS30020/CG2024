@@ -1,0 +1,9 @@
+In this workbook we explore some of the more advanced aspects of model rendering. In particular, we will focus on the use of various lighting and shading effects to make our renders look more realistic and aesthetically appealing.
+
+In the slides and audio narration above, we introduce three distinct types of light as a convenient _approximation_ to real-world lighting:
+
+- Diffuse lighting: "general" surface lighting (which we later decomposed into Proximity and Angle of Incidence)
+- Specular highlighting: a special effect to give objects the appearance of a "glossy" or "shiny" surface
+- Ambient lighting: background lighting as an approximation to "global illumination"
+
+To aid your understanding of this topic, the animation linked to above provides an illustration of the appearance and effect of each type of light. The following sections explore the implementation of these different types of light in more detail. It is important however that you have an understanding of the overall concepts before moving on to the practical tasks in this workbook.

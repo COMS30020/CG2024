@@ -1,0 +1,5 @@
+Gouraud shading is fine, but it only goes so far in creating smoothly rendered model surfaces - if you look closely at the image of the red sphere, you can see a bright cross shape that marks the boundaries of the surface faces. _Phong shading_ is an even more sophisticated approach that takes shading one step further (although it can only achieve this at the cost of additional computation !). Take a look at the slides and audio narration above to gain an understanding of the operation of Phong Shading. Adapt your renderer to make use of this more sophisticated approach.
+
+Note that the audio narration makes reference to the concept of "bump maps" (which you may wish to explore in the coursework assignment - if you are doing the coursework variant of this unit). We mention bump maps here in order to link this concept into the discussion on Phong shading (in case you need it later).
+
+The diagram below illustrates the different results of flat, Gouraud and Phong shading. Again, all three spheres have exactly the same geometry and number of triangles. It is just the alternative rendering approaches that make them appear different.

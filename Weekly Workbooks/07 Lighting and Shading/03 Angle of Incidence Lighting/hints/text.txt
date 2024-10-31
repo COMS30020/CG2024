@@ -1,0 +1,6 @@
+Note that we need to be a little bit careful - each triangle actually has TWO normals (the front face and the back face !). Calculating the _correct_ normal requires us to pick the appropriate two triangle edges to cross product. However _which_ two edges we use will depend on the "winding order" used when the OBJ model was created. View <a href="resources/winding.mp4" target="_blank">this video</a> for an explanation of the concept of "winding order". You won't always know which winding was used when creating a particular model - the best advice is to just to pick two edges and try it. You will soon know if you were wrong (all your surfaces will be dark) so you can then just switch to using alternative edges. This might seem like trial and error, but this is often the way with exploratory rendering !
+
+Note that when considering the angle that the light hits the surface...  
+you **MUST** use: _the direction vector of the LIGHT from the POINT ON THE SURFACE_  
+and **NOT**: _the direction vector of the POINT ON THE SURFACE from the LIGHT_  
+If you use the wrong one, you will end up lighting the back surface of your triangles !

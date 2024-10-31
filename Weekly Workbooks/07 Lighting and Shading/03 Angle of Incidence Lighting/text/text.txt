@@ -1,0 +1,11 @@
+Your next task is to implement "Angle-of-Incidence" lighting. This lights a surface by considering the _orientation_ of that surface relative to the position of a light source. View the two animations linked to above for a high-level explanation of "Angle-of-Incidence" lighting.
+
+In order to implement this kind of lighting, we must first calculate a "normal" for each triangle (a vector that is perpendicular to the surface of the triangle). View the slides and audio narration above to find out how to calculate the normal for a particular surface. Using the knowledge gained, calculate the normal of each triangle in the Cornell Box model. To help achieve this, you might like to use the GLM `cross` function to calculate the cross product of two edges of a triangle.
+
+Note that you can safely calculate and store the normals of all triangles when you first load in the OBJ geometry file (since these normals will not change during the operation of the renderer). It is worth noting that the `ModelTriangle` class has a `normal` attribute that can be used to store the calculated normal for each triangle. 
+
+Once the surface normals have been calculated, you can then use these to calculate the angle of incidence of light falling onto the surfaces. This is done by taking the dot product of the normal and light direction vectors (as shown in the slides and audio narration above). To calculate dot products, you might like to use the `dot` function provided by GLM.
+
+Once calculated, use these angles of incidence to adjust the brightness of each pixel (in a similar way to that which you did with proximity in the previous task). You should end up with a render that looks like the image shown below. Note that we have removed the shadow feature from this render in order to more clearly illustrate the appearance of diffuse lighting. If you have implemented event handlers to move the position of your light point, use this feature to test that your lighting looks realistic from a number of different light positions.
+
+

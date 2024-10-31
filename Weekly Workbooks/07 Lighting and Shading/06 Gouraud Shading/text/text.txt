@@ -1,0 +1,7 @@
+We finish this workbook by considering some rendering enhancements that will improve the aesthetics of your renders, with only a minimal additional performance overhead.
+
+Due to the fact that we represent models as a series of triangles, any artefacts within a model will have a finite resolution. When rendering a model (unless we have a huge number of triangles) the surfaces may well appear "blocky" and "low-res". But what if we could shade triangles more "intelligently" and blend their edges together ? That would "smooth off" the sharp corners and provide an _apparently_ higher resolution final rendering !
+
+_Gouraud shading_ in one such intelligent approach to surface rendering. View the slides and audio narration above to gain an understanding of the principles of Gouraud shading and then using this knowledge, implement this approach in your renderer. In order to achieve this, you will need to make use of _Barycentric coordinates_ to interpolate vertex brightnesses across the face of each triangle. The operation of Barycentric coordinates is illustrated in the animation at the top of this section.
+
+The image below illustrates the smoothing effect that can be achieved using Gouraud shading - it is important to note that both spheres shown in the diagram have the _same_ geometry (the same number of triangles). The surfaces in the sphere on the left are shaded with a flat colour, whereas the sphere on the right is rendered using Gouraud shading. Clearly the right hand sphere _looks_ a lot smoother !

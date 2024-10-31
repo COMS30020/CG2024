@@ -1,0 +1,3 @@
+One of the trickiest parts of this task is figuring out _which_ weighting to apply to _which_ vertex brightness. Watch the Barycentric coordinates animation closely in order to work out which vertices you need to apply `u`, `v` and `w` to in order to calculate the correctly weighted brightness.
+
+The Cornell Box isn't the most useful model for testing Gouraud shading (it's hard to "smooth off" the edges of a cube !). For this reason, we have provided a simple <a href="resources/sphere.obj" target="_blank">additional OBJ model</a> for you to use when testing your code.
