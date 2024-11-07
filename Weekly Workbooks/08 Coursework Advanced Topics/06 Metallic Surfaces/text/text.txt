@@ -1,0 +1,5 @@
+Metallic surfaces behave in a very similar way to mirrors (in fact early mirrors were often made from highly polished sheets of metal). We can however adjust a number of parameters in order to achieve the appearance of different types of metal in our renders. Firstly, we can "tint" a ray of light when it bounces off a surface, depending on the colour of the metal we want to render (for example gold, brass, copper etc).
+
+Metal surfaces are typically reflective, but are often not perfectly smooth (their surfaces contain microscopic imperfections). In order to represent this in your render, you will need to apply minor deviations (often called "perturbations") to the direction of the reflection vectors. 
+
+You will need to investigate an appropriate mechanism to apply these perturbations - implementing this features is tricker than you might think ! If done incorrectly, surfaces often appear "speckled" rather than the intended matt/frosted texture. You may even end up with a surface that appears to "swirl" as the perturbations alter between frames. 

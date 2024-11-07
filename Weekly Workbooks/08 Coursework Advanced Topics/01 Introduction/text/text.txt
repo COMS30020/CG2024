@@ -1,0 +1,5 @@
+This workbook does not contain any explicit practical tasks for you to complete. Rather, it provides a "playlist" of slides, audio narrations and animations of advanced rendering topics. Some of these techniques you may wish to implement in your rendering engine, others you may wish only to gain an appreciation of.
+
+If you are taking the coursework assessed variant of this unit, implementing a selection of these in your final render _should_ result in a higher grade (depending on how well you implement them !). Check the "Indicative Marking Guide" to see how each feature may impact your grade - some techniques are more difficult to implement than others, so consequently carry more marks.
+
+If you are taking the examination variant of this unit, you will not be assessed on the topics outlined in this workbook. However you may wish to explore them purely for your own interest.

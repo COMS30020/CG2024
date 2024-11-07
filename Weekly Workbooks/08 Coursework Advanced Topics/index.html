@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>08 Coursework Advanced Topics</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">08 Coursework Advanced Topics</h1>
+</header>
+<h2 id="coursework-advanced-topics">Coursework Advanced Topics</h2>
+<h3
+id="weekly-briefing"><a href="https://www.ole.bris.ac.uk/webapps/blackboard/content/launchLink.jsp?course_id=_260093_1&tool_id=_5824_1&tool_type=TOOL&mode=cpview&mode=reset" target="_blank">
+Weekly Briefing <img src="../../resources/icons/briefing.png" />
+</a></h3>
+<h3 id="task-1-introduction">Task 1: Introduction</h3>
+<p>This workbook does not contain any explicit practical tasks for you
+to complete. Rather, it provides a “playlist” of slides, audio
+narrations and animations of advanced rendering topics. Some of these
+techniques you may wish to implement in your rendering engine, others
+you may wish only to gain an appreciation of.</p>
+<p>If you are taking the coursework assessed variant of this unit,
+implementing a selection of these in your final render <em>should</em>
+result in a higher grade (depending on how well you implement them !).
+Check the “Indicative Marking Guide” to see how each feature may impact
+your grade - some techniques are more difficult to implement than
+others, so consequently carry more marks.</p>
+<p>If you are taking the examination variant of this unit, you will not
+be assessed on the topics outlined in this workbook. However you may
+wish to explore them purely for your own interest.</p>
+<h1 id="section"></h1>
+<h3 id="task-2-texture-mapping">Task 2: Texture Mapping</h3>
+<p><a href='02%20Texture%20Mapping/animation/segment-1.mp4' target='_blank'>
+<img src="../../resources/icons/animation.png" /> </a></p>
+<p>During the rasterisation workbooks, we encountered difficulties when
+attempting to texture map 3D objects using 2D drawing functions. The
+problem was that, due to the fact that our texture drawing functions did
+not take into account z depth of model artefacts, it was not possible to
+incorporate the effects of perspective in our renders. It is
+<em>possible</em> to “correct” the perspective of rasterised textures
+(by using quite a complex formula). However, rendering perspective
+correct textures using a ray tracer is MUCH easier (once you understand
+Gouraud or Phong shading, it’s actually almost trivial !)</p>
+<p>The basic principle is to use the <code>u</code>, <code>v</code> and
+<code>w</code> proportional distances derived from calculating the
+closest intersection in order to calculate the position of the required
+pixel from the texture map. Just as it is possible to calculate a
+weighted average pixel colour (as shown in the animation above), it is
+also possible to determine the location of the “donor” pixel from the
+texture map - by simply calculating a weighted average of vertex texture
+points.</p>
+<p>As one student who previously took this unit once observed:
+“Barycentric coordinates are great - once you have implemented them, you
+get perspective corrected texture mapping for free !”</p>
+<p><img src="02%20Texture%20Mapping/images/mapping.jpg" /></p>
+<h1 id="section-1"></h1>
+<h3 id="task-3-soft-shadow">Task 3: Soft Shadow</h3>
+<p><a href='03%20Soft%20Shadow/slides/segment-1.pdf' target='_blank'>
+<img src="../../resources/icons/slides.png" /> </a>
+<a href='03%20Soft%20Shadow/audio/segment-1.mp4' target='_blank'> <img
+src="../../resources/icons/audio.png" /> </a>
+<a href='03%20Soft%20Shadow/audio/segment-2.mp4' target='_blank'> <img
+src="../../resources/icons/audio.png" /> </a>
+<a href='03%20Soft%20Shadow/animation/segment-1.mp4' target='_blank'>
+<img src="../../resources/icons/animation.png" /> </a></p>
+<p>Up until this point, we have taken a simplistic approach to shadows.
+By only considering single point light sources we can only produce naive
+and simplistic “hard” shadows (as illustrated in the left hand image
+below). If we want to implement more realistic “soft” shadows (as
+illustrated in the right hand image below) we are going to need a more
+sophisticated approach. View the animation linked to above for a deeper
+understanding of what we are trying to achieve.</p>
+<p>The simplest (but by no means most efficient) way to implement soft
+shadows is to use multi-point light sources. View the slides and audio
+narration linked to above for a high-level explanation of how to
+implement this approach. If you decide to implement soft shadows using
+this technique, be prepared for a significant increase in rendering time
+!</p>
+<p><img src="03%20Soft%20Shadow/images/soft-shadow.jpg" /></p>
+<h1 id="section-2"></h1>
+<h3 id="task-4-mirrored-surfaces">Task 4: Mirrored Surfaces</h3>
+<p><a href='04%20Mirrored%20Surfaces/slides/segment-1.pdf' target='_blank'>
+<img src="../../resources/icons/slides.png" /> </a>
+<a href='04%20Mirrored%20Surfaces/audio/segment-1.mp4' target='_blank'>
+<img src="../../resources/icons/audio.png" /> </a>
+<a href='04%20Mirrored%20Surfaces/audio/segment-2.mp4' target='_blank'>
+<img src="../../resources/icons/audio.png" /> </a>
+<a href='04%20Mirrored%20Surfaces/animation/segment-1.mp4' target='_blank'>
+<img src="../../resources/icons/animation.png" /> </a></p>
+<p>Rather than rendering triangles as just opaque, matt surfaces, it
+would be nice if we could simulate more interesting and complex
+materials. The slides, audio narration and animation above provide
+details of how to render triangles as reflective surfaces. We start out
+by performing a standard “closest intersection” calculation. However,
+rather than shading the image plane pixel the colour of the intersected
+triangle, we “bounce” the ray off the surface - using the formula shown
+in the above slides. The colour of the triangle that is
+<em>subsequently</em> hit is the one that is then used to shade the
+pixel. In this way, we can achieve the rendering of mirror-like
+reflective surfaces.</p>
+<p><img src="04%20Mirrored%20Surfaces/images/reflective.jpg" /></p>
+<h1 id="section-3"></h1>
+<h3 id="task-5-environment-maps">Task 5: Environment Maps</h3>
+<p><a href='05%20Environment%20Maps/slides/segment-1.pdf' target='_blank'>
+<img src="../../resources/icons/slides.png" /> </a>
+<a href='05%20Environment%20Maps/audio/segment-1.mp4' target='_blank'>
+<img src="../../resources/icons/audio.png" /> </a></p>
+<p>The problem with rendering mirrored surfaces is that they reflect
+<em>everything</em> that surrounds them ! The large number of resultant
+calculations can make rendering complex scenes particularly costly. We
+can however use flat images in the form of “Environment Maps” to capture
+a view of the surrounding area from the perspective of a 3D object. Due
+to the fact that these maps are flat images (rather than 3D models in
+their own right) this can make the computation of reflections much more
+efficient. The slides and audio narration above provide a high-level
+introduction of this approach to rendering.</p>
+<p><img src="05%20Environment%20Maps/images/env-map.jpg" /></p>
+<h1 id="section-4"></h1>
+<h3 id="task-6-metallic-surfaces">Task 6: Metallic Surfaces</h3>
+<p><a href='06%20Metallic%20Surfaces/animation/segment-1.mp4' target='_blank'>
+<img src="../../resources/icons/animation.png" /> </a></p>
+<p>Metallic surfaces behave in a very similar way to mirrors (in fact
+early mirrors were often made from highly polished sheets of metal). We
+can however adjust a number of parameters in order to achieve the
+appearance of different types of metal in our renders. Firstly, we can
+“tint” a ray of light when it bounces off a surface, depending on the
+colour of the metal we want to render (for example gold, brass, copper
+etc).</p>
+<p>Metal surfaces are typically reflective, but are often not perfectly
+smooth (their surfaces contain microscopic imperfections). In order to
+represent this in your render, you will need to apply minor deviations
+(often called “perturbations”) to the direction of the reflection
+vectors.</p>
+<p>You will need to investigate an appropriate mechanism to apply these
+perturbations - implementing this features is tricker than you might
+think ! If done incorrectly, surfaces often appear “speckled” rather
+than the intended matt/frosted texture. You may even end up with a
+surface that appears to “swirl” as the perturbations alter between
+frames.</p>
+<p><img src="06%20Metallic%20Surfaces/images/metals.jpg" /></p>
+<h1 id="section-5"></h1>
+<h3 id="task-7-refractive-materials">Task 7: Refractive Materials</h3>
+<p><a href='07%20Refractive%20Materials/slides/segment-1.pdf' target='_blank'>
+<img src="../../resources/icons/slides.png" /> </a>
+<a href='07%20Refractive%20Materials/audio/segment-1.mp4' target='_blank'>
+<img src="../../resources/icons/audio.png" /> </a>
+<a href='07%20Refractive%20Materials/animation/segment-1.mp4' target='_blank'>
+<img src="../../resources/icons/animation.png" /> </a>
+<a href='07%20Refractive%20Materials/animation/segment-2.mp4' target='_blank'>
+<img src="../../resources/icons/animation.png" /> </a></p>
+<p>Rather than rendering only opaque surfaces it would be nice if we
+could simulate transparent materials. The slides, audio narration and
+animations above provide high-level details of how to render triangles
+as refractive surfaces. This technique can be used in order to represent
+materials such as glass or water.</p>
+<p>Correctly implementing transparent materials is a
+<strong>difficult</strong> task. This is because we must not only deal
+with <em>refraction</em> of light, but ALSO the <em>reflection</em> of
+rays. When the angle of incidence is very shallow (as shown on the right
+hand side in the image below) the refracted ray does not escape the
+block. In this situation, the surface of the block acts as a mirror -
+resulting in internal reflection of the ray.</p>
+<p>When attempting an implementation of refractive materials, you may
+find
+<a href="https://ricktu288.github.io/ray-optics/" target="_blank">this
+online optics tool</a> and
+<a href="resources/reference.jpg" target="_blank">this physical Cornell
+box reference image</a> both useful in checking and validating your
+results.    </p>
+<p><img
+src="07%20Refractive%20Materials/images/internal-reflection.jpg" /></p>
+<h1 id="section-6"></h1>
+<h3 id="task-8-normal-maps">Task 8: Normal Maps</h3>
+<p><a href='08%20Normal%20Maps/slides/segment-1.pdf' target='_blank'>
+<img src="../../resources/icons/slides.png" /> </a>
+<a href='08%20Normal%20Maps/audio/segment-1.mp4' target='_blank'> <img
+src="../../resources/icons/audio.png" /> </a>
+<a href='08%20Normal%20Maps/animation/segment-1.mp4' target='_blank'>
+<img src="../../resources/icons/animation.png" /> </a></p>
+<p>Finding the closest intersection between a ray and a set of triangles
+is a costly activity. This is especially true for complex models where
+each ray being cast must be checked against a potentially very large
+number of model triangles. There would be a considerable computational
+cost saving if we could limit the number of triangles in a model, but
+still render the surfaces with complex surface geometry. Take a look at
+the slides, narration and animation linked to above to find out how we
+can “fake” complex geometry (using “light &amp; shadows”), whilst at the
+same time keeping the number of model triangles to a minimum.</p>
+<p><img src="08%20Normal%20Maps/images/normal-map.jpg" /></p>
+<h1 id="section-7"></h1>
+<h3 id="task-9-photon-maps">Task 9: Photon Maps</h3>
+<p><a href='09%20Photon%20Maps/slides/segment-1.pdf' target='_blank'>
+<img src="../../resources/icons/slides.png" /> </a>
+<a href='09%20Photon%20Maps/audio/segment-1.mp4' target='_blank'> <img
+src="../../resources/icons/audio.png" /> </a>
+<a href='09%20Photon%20Maps/animation/segment-1.mp4' target='_blank'>
+<img src="../../resources/icons/animation.png" /> </a></p>
+<p>Previously we used ambient lighting as an approximation to global
+illumination. However, this is a very big approximation that prevents us
+from rendering certain types of specialist lighting effects. <em>Photon
+maps</em> offer a much more sophisticated approach that allow us to
+precompute patterns of light dispersal in order to (relatively)
+efficiently render more realistic indirect illumination. Take a look at
+the slides, audio narration and animation linked to above to gain an
+insight into this technique.</p>
+<p><img src="09%20Photon%20Maps/images/photon-map.jpg" /></p>
+<h1 id="section-8"></h1>
+<h3 id="end-of-workbook">End of workbook</h3>
+</body>
+</html>

@@ -1,0 +1,9 @@
+Rather than rendering only opaque surfaces it would be nice if we could simulate transparent materials. The slides, audio narration and animations above provide high-level details of how to render triangles as refractive surfaces. This technique can be used in order to represent materials such as glass or water.
+
+Correctly implementing transparent materials is a **difficult** task. This is because we must not only deal with _refraction_ of light, but ALSO the _reflection_ of rays. When the angle of incidence is very shallow (as shown on the right hand side in the image below) the refracted ray does not escape the block. In this situation, the surface of the block acts as a mirror - resulting in internal reflection of the ray.
+
+When attempting an implementation of refractive materials, you may find <a href="https://ricktu288.github.io/ray-optics/" target="_blank">this online optics tool</a> and 
+<a href="resources/reference.jpg" target="_blank">this physical Cornell box reference image</a>
+both useful in checking and validating your results.
+&nbsp;
+&nbsp;
